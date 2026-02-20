@@ -939,6 +939,35 @@ function filterWork(lang,btn){
     card.classList.toggle('hidden', lang!=='all' && card.dataset.lang!==lang);
   });
 }
+// Showreel Modal
+const modal = document.getElementById('showreel-modal');
+const trigger = document.getElementById('showreel-trigger');
+const closeBtn = document.getElementById('modal-close');
+const iframe = document.getElementById('vimeo-player');
+
+// Open modal and autoplay
+trigger.addEventListener('click', function(e) {
+  e.preventDefault();
+  modal.style.display = 'flex';
+  // Add autoplay parameter to the src
+  iframe.src = iframe.src.split('?')[0] + '?h=c8a8c50c97&autoplay=1';
+});
+
+// Close modal and stop video
+function closeModal() {
+  modal.style.display = 'none';
+  // Remove autoplay by resetting src (stops video)
+  iframe.src = iframe.src.split('?')[0] + '?h=c8a8c50c97';
+}
+
+closeBtn.addEventListener('click', closeModal);
+
+// Click outside the video to close
+window.addEventListener('click', function(e) {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
 </script>
   // Showreel Modal
 const modal = document.getElementById('showreel-modal');
